@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package eventmanager;
-
+import javax.swing.JOptionPane;
+import eventmanager.AdmMain;
 /**
  *
  * @author macbook
@@ -16,6 +17,7 @@ public class EventManager {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new AdmMain().setVisible(true);
     }
     
 }
