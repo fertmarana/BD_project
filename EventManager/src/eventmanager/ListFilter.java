@@ -26,19 +26,28 @@ public class ListFilter extends javax.swing.JFrame {
      * Creates new form ListFilter
      */
     public ListFilter(List<Filter> s) {
-        filters = s;
+        
         
         initComponents();
+        
+        addFromList(s);
     }
 
     
     public void addFromList(List<Filter> s){
          this.filters.clear();
          this.filters.addAll(s);
+         int size = s.size();
+         System.out.printf("veja: %d", size);
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.addRow(new Object[]{"Column 1", "Column 2", "Column 3","Column 4"});
-         //model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
-         model.fireTableDataChanged();
+        for(int i=0; i<size; i++){
+           // model.addRow(new Object[]{"Column 1", "Column 2", "Column 3","Column 5"});
+          model.addRow(new Object[]{filters.get(i).getSearch(),filters.get(i).getAtribute(),filters.get(i).getKey(),filters.get(i).getOp()});
+          
+        }
+        //model.addRow(new Object[]{"Column 1", "Column 2", "Column 3","Column 4"});
+        //model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
+         
     }
     
     
@@ -81,10 +90,7 @@ public class ListFilter extends javax.swing.JFrame {
         
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                
             },
             new String [] {
                 "Buscar", "Atributo ", "Chave", "Operação"

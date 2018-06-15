@@ -293,7 +293,7 @@ public class AdmMain extends javax.swing.JFrame {
 
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
         // TODO add your handling code here:
-        
+        System.out.printf("ANTES: %d",conditions.size());
         new ListFilter(conditions).setVisible(true);
         
     }//GEN-LAST:event_btnListActionPerformed
