@@ -3,22 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanager;
-import javax.swing.JOptionPane;
-import eventmanager.AdmMain;
+package textureextractapp;
+
 /**
  *
  * @author macbook
  */
-public class EventManager {
-    //public List<String> conditions = new List<String>();
-    
+public class TextureExtractApp {
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        new AdmMain().setVisible(true);
     }
     
 }

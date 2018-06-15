@@ -5,21 +5,44 @@
  */
 package eventmanager;
 import eventmanager.EventMain;
+import java.util.ArrayList;
+import java.util.List;
+import eventmanager.Filter;
+import eventmanager.ListFilter;
 /**
  *
  * @author macbook
  */
 public class AdmMain extends javax.swing.JFrame {
     //private JFrame jf = new JFrame()
-    
+    List<Filter> conditions = new ArrayList<Filter>();
+    int listSize;
+    String[] Seventos = new String[] {"Nome", "Data", "Preço", "Tipo", "Endereço", "Representante", "Decorador","Tema"};
+    String[] Spessoas = new String[] {"Nome", "RG", "CPF", "Categoria", "Telefone", "Email", "Funcao","Turno", "CNPJAssociado", "Apelido"};
+    String[] Satracoes = new String[] {"Nome", "Artista","Restrição de Idade"};
+    String[] Sempresas = new String[] {"CNPJ","Nome Fantasia", "Tipo de Serviço","Telefone","Preço do Serviço","Email"};
+    public String SelectedAtribute;
+    public String SelectedKey;
+    public String SelectedOperation;
+// create a combo box with the fixed array:
+
     /**
      * Creates new form AdmMain
      */
     public AdmMain() {
         
         
-        
+        listSize = 0;
         initComponents();
+        lAtributes.setVisible(false);
+        cBoxAtributes.setVisible(false);
+        lAdd.setVisible(false);
+        lFilltF.setVisible(false);
+        lOperation.setVisible(false);
+        cBoxOperation.setVisible(false);
+        lManual.setVisible(false);
+        btnAdd.setVisible(false);
+        tFKey.setVisible(false);
     }
 
     /**
@@ -46,11 +69,12 @@ public class AdmMain extends javax.swing.JFrame {
         btnFilter = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         lAdd = new javax.swing.JLabel();
-        lnotAdd = new javax.swing.JLabel();
         lManual = new javax.swing.JLabel();
         bntManual = new javax.swing.JButton();
         btnList = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
+        lOperation = new javax.swing.JLabel();
+        cBoxOperation = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,11 +85,11 @@ public class AdmMain extends javax.swing.JFrame {
 
         jLabel2.setText("Buscar:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas", "Funcionários", "Comerciantes" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas" }));
 
         jLabel3.setText("Por:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas", "Funcionários", "Comerciantes" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas" }));
 
         lAtributes.setText("Atributos:");
 
@@ -81,10 +105,13 @@ public class AdmMain extends javax.swing.JFrame {
         });
 
         btnAdd.setText("Adicionar à lista de filtros");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         lAdd.setText("Item adicionado.");
-
-        lnotAdd.setText("Item não adicionado. O formato deve estar errado.");
 
         lManual.setText("Para saber como adicionar essa chave acesse manual.");
 
@@ -104,6 +131,10 @@ public class AdmMain extends javax.swing.JFrame {
 
         btnSearch.setText("Buscar");
 
+        lOperation.setText("Escolha uma operação:");
+
+        cBoxOperation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AND", "OR" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,48 +142,47 @@ public class AdmMain extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(78, 78, 78)
-                                        .addComponent(lAtributes))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(57, 57, 57)
-                                        .addComponent(btnFilter)))
-                                .addGap(18, 18, 18)
-                                .addComponent(cBoxAtributes, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(112, 112, 112)
+                                .addComponent(lAtributes))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lAdd)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tFKey, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(57, 57, 57)
-                                        .addComponent(btnAdd))
-                                    .addComponent(lnotAdd)
-                                    .addComponent(lManual))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnFilter)))
+                        .addGap(18, 18, 18)
+                        .addComponent(cBoxAtributes, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(16, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lFilltF)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnList)
+                                    .addGap(62, 62, 62)
+                                    .addComponent(btnSearch))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lManual)
+                                    .addComponent(tFKey, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lFilltF)
+                                    .addComponent(lAdd)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(bntManual)
-                                .addGap(78, 78, 78)
-                                .addComponent(btnList)
+                                .addComponent(lOperation)
+                                .addGap(18, 18, 18)
+                                .addComponent(cBoxOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSearch)
-                                .addGap(11, 11, 11)))))
+                                .addComponent(btnAdd)
+                                .addGap(9, 9, 9)))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(bntManual)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,22 +200,22 @@ public class AdmMain extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lFilltF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tFKey, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tFKey, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(lOperation)
+                    .addComponent(cBoxOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(lAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lnotAdd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lManual)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntManual)
                     .addComponent(btnList)
-                    .addComponent(btnSearch))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(btnSearch)))
         );
 
         jTabbedPane1.addTab("Buscas Avançadas", jPanel1);
@@ -219,17 +249,75 @@ public class AdmMain extends javax.swing.JFrame {
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
         // TODO add your handling code here:
         
+        int i;
+       // jComboBox1.setEnabled(false);
+       if(!conditions.isEmpty()){
+        lOperation.setVisible(true);
+        cBoxOperation.setVisible(true);
+       }
+        lFilltF.setVisible(true);
+        lAtributes.setVisible(true);
+        btnAdd.setVisible(true);
+        tFKey.setVisible(true);
+        cBoxAtributes.setVisible(true);
+        
+        lOperation.setVisible(true);
+        cBoxOperation.setVisible(true);
+        cBoxAtributes.removeAllItems();
+        if(jComboBox2.getSelectedIndex()==0){
+            for (i=0; i < 8; i++){
+                cBoxAtributes.addItem(Seventos[i]);
+            }
+            
+        } else if(jComboBox2.getSelectedIndex()==1){
+            for (i=0; i < 10; i++){
+                cBoxAtributes.addItem(Spessoas[i]);
+            }
+            
+            
+        } else if(jComboBox2.getSelectedIndex()==2){
+                        for (i=0; i < 3; i++){
+                cBoxAtributes.addItem(Satracoes[i]);
+            }
+
+            
+        } else if(jComboBox2.getSelectedIndex()==3){
+                        for (i=0; i < 6; i++){
+                cBoxAtributes.addItem(Sempresas[i]);
+            }
+
+            
+        }
+        
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
         // TODO add your handling code here:
-        new ListFilter().setVisible(true);
+        
+        new ListFilter(conditions).setVisible(true);
         
     }//GEN-LAST:event_btnListActionPerformed
 
     private void bntManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntManualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bntManualActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+       // String s = 
+       String op;
+        String Search = jComboBox1.getSelectedItem().toString();
+        System.out.printf("%s", Search);
+        String Atribute = jComboBox2.getSelectedItem().toString();
+        String Key = tFKey.getText();
+        if(conditions.isEmpty()) {
+           op = "-";
+        }else{
+            op = cBoxOperation.getSelectedItem().toString();
+        }
+        conditions.add(new Filter(Search, Atribute, Key, op));
+        System.out.printf("%d",conditions.size());
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,11 +347,7 @@ public class AdmMain extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdmMain().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,6 +357,7 @@ public class AdmMain extends javax.swing.JFrame {
     private javax.swing.JButton btnList;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cBoxAtributes;
+    private javax.swing.JComboBox<String> cBoxOperation;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -285,7 +370,7 @@ public class AdmMain extends javax.swing.JFrame {
     private javax.swing.JLabel lAtributes;
     private javax.swing.JLabel lFilltF;
     private javax.swing.JLabel lManual;
-    private javax.swing.JLabel lnotAdd;
+    private javax.swing.JLabel lOperation;
     private javax.swing.JTextField tFKey;
     // End of variables declaration//GEN-END:variables
 }
