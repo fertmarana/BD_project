@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanager;
+package Interface;
 import javax.swing.JOptionPane;
-import eventmanager.AdmMain;
+import Interface.AdmMain;
 import java.util.ArrayList;
 import java.util.List;
 /**

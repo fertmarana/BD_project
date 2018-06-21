@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanager;
-import eventmanager.EventMain;
+package Interface;
+import sql.EventMain;
 import java.util.ArrayList;
 import java.util.List;
-import eventmanager.Filter;
-import eventmanager.ListFilter;
+import Interface.Filter;
+import Interface.ListFilter;
 /**
  *
  * @author macbook

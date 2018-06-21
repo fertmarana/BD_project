@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eventmanager;
+package Interface;
 
 import java.util.List;
-import eventmanager.Filter;
+import Interface.Filter;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -68,11 +68,7 @@ public class ListFilter extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        Object[] columns = { "Buscar", "Atributo ", "Chave", "Operação"};
-        model = new DefaultTableModel();
-        model.setColumnIdentifiers(columns);
-        jTable2.setModel(model);
-        
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -87,10 +83,13 @@ public class ListFilter extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        
+
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
                 "Buscar", "Atributo ", "Chave", "Operação"
@@ -106,15 +105,6 @@ public class ListFilter extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        
-      // model = (DefaultTableModel) jTable2.getModel();
-        model = new DefaultTableModel();
-        model.addColumn("Buscar");
-        model.addColumn("Atributo");
-        model.addColumn("Chave");
-        model.addColumn("Operação");
-      
-      
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Lista de Filtros");
 
@@ -209,6 +199,5 @@ public class ListFilter extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private DefaultTableModel model;
     // End of variables declaration//GEN-END:variables
 }
