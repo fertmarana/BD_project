@@ -29,10 +29,25 @@ public class AdmMain extends javax.swing.JFrame {
     /**
      * Creates new form AdmMain
      */
-    public AdmMain() {
-        
+    public AdmMain(List<Filter> list) {
+        this.conditions = list;
         
         listSize = 0;
+        initComponents();
+        lAtributes.setVisible(false);
+        cBoxAtributes.setVisible(false);
+        lAdd.setVisible(false);
+        lFilltF.setVisible(false);
+        lOperation.setVisible(false);
+        cBoxOperation.setVisible(false);
+        lManual.setVisible(false);
+        btnAdd.setVisible(false);
+        tFKey.setVisible(false);
+    }
+    public AdmMain() {
+        //this.conditions = list;
+        
+        //listSize = 0;
         initComponents();
         lAtributes.setVisible(false);
         cBoxAtributes.setVisible(false);
@@ -56,7 +71,14 @@ public class AdmMain extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel4 = new javax.swing.JLabel();
+        btnAddEvent = new javax.swing.JButton();
+        btnRemoveEvent = new javax.swing.JButton();
+        btnAlterEvent = new javax.swing.JButton();
+        btnSearchEvent = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -81,21 +103,105 @@ public class AdmMain extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel1.setText("Administrador");
 
-        jTabbedPane1.addTab("Eventos", jTabbedPane3);
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel4.setText("Eventos");
+
+        btnAddEvent.setText("Adicionar Evento");
+        btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEventActionPerformed(evt);
+            }
+        });
+
+        btnRemoveEvent.setText("Remover Evento");
+        btnRemoveEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveEventActionPerformed(evt);
+            }
+        });
+
+        btnAlterEvent.setText("Editar Evento");
+        btnAlterEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterEventActionPerformed(evt);
+            }
+        });
+
+        btnSearchEvent.setText("Acessar Evento");
+        btnSearchEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchEventActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAddEvent)
+                            .addComponent(btnRemoveEvent)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSearchEvent)
+                                    .addComponent(btnAlterEvent)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel4)))
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1)
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(btnAddEvent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemoveEvent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAlterEvent)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnSearchEvent)
+                        .addContainerGap(50, Short.MAX_VALUE))))
+        );
+
+        jTabbedPane1.addTab("Eventos", jPanel2);
 
         jLabel2.setText("Buscar:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas", "Alimentação" }));
 
         jLabel3.setText("Por:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Eventos", "Pessoas", "Atrações", "Empresas", "Alimentação" }));
 
         lAtributes.setText("Atributos:");
 
         cBoxAtributes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lFilltF.setText("Preencha com a chave do atributo selecionado que deseja (use * para selecionar todas)");
+
+        tFKey.setText("null");
 
         btnFilter.setText("Filtrar");
         btnFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -294,6 +400,7 @@ public class AdmMain extends javax.swing.JFrame {
     private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
         // TODO add your handling code here:
         System.out.printf("ANTES: %d",conditions.size());
+        this.dispose();
         new ListFilter(conditions).setVisible(true);
         
     }//GEN-LAST:event_btnListActionPerformed
@@ -318,6 +425,27 @@ public class AdmMain extends javax.swing.JFrame {
         conditions.add(new Filter(Search, Atribute, Key, op));
         System.out.printf("%d",conditions.size());
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSearchEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchEventActionPerformed
+        // TODO add your handling code here:
+        new ExtEventConfiguration().setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnSearchEventActionPerformed
+
+    private void btnAlterEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterEventActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlterEventActionPerformed
+
+    private void btnRemoveEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveEventActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemoveEventActionPerformed
+
+    private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
+        // TODO add your handling code here:
+        new AddEvent().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAddEventActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,9 +481,13 @@ public class AdmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntManual;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddEvent;
+    private javax.swing.JButton btnAlterEvent;
     private javax.swing.JButton btnFilter;
     private javax.swing.JButton btnList;
+    private javax.swing.JButton btnRemoveEvent;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearchEvent;
     private javax.swing.JComboBox<String> cBoxAtributes;
     private javax.swing.JComboBox<String> cBoxOperation;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -363,9 +495,12 @@ public class AdmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel lAdd;
     private javax.swing.JLabel lAtributes;
     private javax.swing.JLabel lFilltF;

@@ -33,49 +33,39 @@ public class AddEmployee extends javax.swing.JFrame {
         lRG = new javax.swing.JLabel();
         lEmail = new javax.swing.JLabel();
         lTelefone = new javax.swing.JLabel();
-        tFNome = new javax.swing.JTextField();
+        tFName = new javax.swing.JTextField();
         tFCPF = new javax.swing.JTextField();
         tFRG = new javax.swing.JTextField();
         tFTelefone = new javax.swing.JTextField();
         tFEmail = new javax.swing.JTextField();
         bSave = new javax.swing.JButton();
-        Warning1 = new javax.swing.JLabel();
-        Warning2 = new javax.swing.JLabel();
         tFuncao = new javax.swing.JLabel();
         cBFunction = new javax.swing.JComboBox<>();
         tTurno = new javax.swing.JLabel();
         cBTurno = new javax.swing.JComboBox<>();
+        lAddorNot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lTitle.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lTitle.setText("Adicionando Funcionário");
 
-        lNome.setText("Nome :");
+        lNome.setText("Nome*:");
 
         lCPF.setText("CPF* :");
 
-        lRG.setText("RG :");
+        lRG.setText("RG*:");
 
         lEmail.setText("Email :");
 
         lTelefone.setText("Telefone :");
 
-        tFNome.setText("jTextField1");
-
-        tFCPF.setText("jTextField1");
-
-        tFRG.setText("jTextField1");
-
-        tFTelefone.setText("jTextField1");
-
-        tFEmail.setText("jTextField1");
-
         bSave.setText("Finalizar");
-
-        Warning1.setText("Não foi possível finalizar pois os campos obrigatórios");
-
-        Warning2.setText("* não foram preenchidos adequadamente");
+        bSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSaveActionPerformed(evt);
+            }
+        });
 
         tFuncao.setText("Função :");
 
@@ -83,7 +73,9 @@ public class AddEmployee extends javax.swing.JFrame {
 
         tTurno.setText("Turno :");
 
-        cBTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cBTurno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pré-Festa", "Durante", "Pós-Festa" }));
+
+        lAddorNot.setText("Adicionado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,33 +86,32 @@ public class AddEmployee extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Warning1)
-                            .addComponent(Warning2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lNome)
-                                    .addComponent(lCPF)
-                                    .addComponent(lRG)
-                                    .addComponent(lTelefone)
-                                    .addComponent(lEmail)
-                                    .addComponent(tFuncao)
-                                    .addComponent(tTurno))
-                                .addGap(86, 86, 86)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cBTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tFRG, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cBFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(lNome)
+                            .addComponent(lCPF)
+                            .addComponent(lRG)
+                            .addComponent(lTelefone)
+                            .addComponent(lEmail)
+                            .addComponent(tFuncao)
+                            .addComponent(tTurno))
+                        .addGap(86, 86, 86)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cBTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tFRG, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tFName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cBFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(bSave))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addComponent(lTitle)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(lTitle))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(lAddorNot)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +121,7 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lNome)
-                    .addComponent(tFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lCPF)
@@ -155,17 +146,30 @@ public class AddEmployee extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tTurno)
                     .addComponent(cBTurno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(Warning1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Warning2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(lAddorNot)
+                .addGap(8, 8, 8)
                 .addComponent(bSave)
                 .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
+        // TODO add your handling code here:
+        if(tFName.getText().equals("") || tFCPF.getText().equals("") || tFRG.getText().equals("")){
+            lAddorNot.setVisible(true);
+            lAddorNot.setText("Näo foi adicionado: Obrigatórias vazias");
+        }else{
+            lAddorNot.setVisible(true);
+            lAddorNot.setText("Adicionado com sucesso"); 
+            new AdmMain().setVisible(true);
+            this.dispose();
+        }
+        
+        
+    }//GEN-LAST:event_bSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,11 +208,10 @@ public class AddEmployee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Warning1;
-    private javax.swing.JLabel Warning2;
     private javax.swing.JButton bSave;
     private javax.swing.JComboBox<String> cBFunction;
     private javax.swing.JComboBox<String> cBTurno;
+    private javax.swing.JLabel lAddorNot;
     private javax.swing.JLabel lCPF;
     private javax.swing.JLabel lEmail;
     private javax.swing.JLabel lNome;
@@ -217,7 +220,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel lTitle;
     private javax.swing.JTextField tFCPF;
     private javax.swing.JTextField tFEmail;
-    private javax.swing.JTextField tFNome;
+    private javax.swing.JTextField tFName;
     private javax.swing.JTextField tFRG;
     private javax.swing.JTextField tFTelefone;
     private javax.swing.JLabel tFuncao;
