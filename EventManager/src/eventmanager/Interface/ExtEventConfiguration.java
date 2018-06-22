@@ -5,6 +5,14 @@
  */
 package eventmanager.Interface;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.collections.FXCollections;
+import sql.ConnectionManager;
+import sql.tables.Pessoa;
+
 /**
  *
  * @author macbook
@@ -16,6 +24,23 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
      */
     public ExtEventConfiguration() {
         initComponents();
+        ResultSet res;
+		List<String> list = new ArrayList<>();
+		String sql = "select NOME from PESSOA";
+		try {
+			res = ConnectionManager.query(sql);
+			while(res.next())			
+				list.add(res.getString(4));
+				
+			res.close();
+			ConnectionManager.closeQuery();
+			//System.out.printf("%s", list.toString());
+			//return FXCollections.observableList(list);
+                        
+		} catch (SQLException e) {
+            throw new RuntimeException(e);
+		}
+	
     }
 
     /**
@@ -52,20 +77,6 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        Funcionários = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
-        jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        Comerciantes = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jList5 = new javax.swing.JList<>();
-        jLabel15 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
         Empresas = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jList6 = new javax.swing.JList<>();
@@ -73,8 +84,6 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
         jButton18 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         Atrações = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
@@ -183,19 +192,19 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
         jTabbedPane1.addTab("Informações Gerais", InfoGeral);
 
         jList4.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane4.setViewportView(jList4);
 
-        jLabel14.setText("Participantes");
+        jLabel14.setText("Pessoas");
 
-        jButton9.setText("Adicionar Participante");
+        jButton9.setText("Adicionar Pessoas");
 
-        jButton10.setText("Remover Participante");
+        jButton10.setText("Remover Pessoa");
 
-        jButton11.setText("Editar Participante");
+        jButton11.setText("Editar Pessoa");
 
         javax.swing.GroupLayout ParticipantesLayout = new javax.swing.GroupLayout(Participantes);
         Participantes.setLayout(ParticipantesLayout);
@@ -208,14 +217,17 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ParticipantesLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(ParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton9)
-                    .addComponent(jButton10)
                     .addGroup(ParticipantesLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton11)))
-                .addGap(63, 63, 63))
+                        .addGroup(ParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ParticipantesLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jButton11))
+                            .addComponent(jButton10))))
+                .addGap(81, 81, 81))
         );
         ParticipantesLayout.setVerticalGroup(
             ParticipantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,128 +248,7 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
                 .addContainerGap(87, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Participantes", Participantes);
-
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
-
-        jLabel10.setText("Funcionários");
-
-        jButton1.setText("Adicionar Funcionário");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Remover Funcionário");
-
-        jButton3.setText("Editar Funcionário");
-
-        javax.swing.GroupLayout FuncionáriosLayout = new javax.swing.GroupLayout(Funcionários);
-        Funcionários.setLayout(FuncionáriosLayout);
-        FuncionáriosLayout.setHorizontalGroup(
-            FuncionáriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FuncionáriosLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(FuncionáriosLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addGroup(FuncionáriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addGroup(FuncionáriosLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton3)))
-                .addGap(63, 63, 63))
-        );
-        FuncionáriosLayout.setVerticalGroup(
-            FuncionáriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FuncionáriosLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel10)
-                .addGroup(FuncionáriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FuncionáriosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FuncionáriosLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Funcionários", Funcionários);
-
-        jList5.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(jList5);
-
-        jLabel15.setText("Comerciantes");
-
-        jButton13.setText("Adicionar Comerciante");
-
-        jButton14.setText("Remover Comerciante");
-
-        jButton15.setText("Editar Comerciante");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout ComerciantesLayout = new javax.swing.GroupLayout(Comerciantes);
-        Comerciantes.setLayout(ComerciantesLayout);
-        ComerciantesLayout.setHorizontalGroup(
-            ComerciantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ComerciantesLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel15)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(ComerciantesLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addGroup(ComerciantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton13)
-                    .addGroup(ComerciantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton15)
-                        .addComponent(jButton14)))
-                .addGap(67, 67, 67))
-        );
-        ComerciantesLayout.setVerticalGroup(
-            ComerciantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ComerciantesLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel15)
-                .addGroup(ComerciantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ComerciantesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ComerciantesLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jButton13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton15)))
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Comerciantes", Comerciantes);
+        jTabbedPane2.addTab("Pessoas", Participantes);
 
         javax.swing.GroupLayout PessoasLayout = new javax.swing.GroupLayout(Pessoas);
         Pessoas.setLayout(PessoasLayout);
@@ -392,10 +283,6 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
 
         jLabel23.setText("Empresas");
 
-        jLabel24.setText("Ordenar por:");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout EmpresasLayout = new javax.swing.GroupLayout(Empresas);
         Empresas.setLayout(EmpresasLayout);
         EmpresasLayout.setHorizontalGroup(
@@ -403,27 +290,16 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
             .addGroup(EmpresasLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(EmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EmpresasLayout.createSequentialGroup()
-                        .addGroup(EmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(EmpresasLayout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(EmpresasLayout.createSequentialGroup()
-                                .addGap(144, 144, 144)
-                                .addComponent(jLabel24)))
-                        .addContainerGap(155, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpresasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addComponent(jButton17)
+                        .addGap(103, 103, 103))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpresasLayout.createSequentialGroup()
                         .addGroup(EmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpresasLayout.createSequentialGroup()
-                                .addComponent(jButton17)
-                                .addGap(103, 103, 103))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpresasLayout.createSequentialGroup()
-                                .addGroup(EmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton20)
-                                    .addComponent(jButton18))
-                                .addGap(112, 112, 112))))))
+                            .addComponent(jButton20)
+                            .addComponent(jButton18))
+                        .addGap(112, 112, 112))))
             .addGroup(EmpresasLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(jLabel23)
@@ -438,10 +314,6 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
                 .addComponent(jButton18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton20)
-                .addGap(116, 116, 116)
-                .addComponent(jLabel24)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpresasLayout.createSequentialGroup()
                 .addContainerGap(39, Short.MAX_VALUE)
@@ -612,14 +484,6 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton15ActionPerformed
-
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton17ActionPerformed
@@ -628,83 +492,37 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton21ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ExtEventConfiguration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ExtEventConfiguration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ExtEventConfiguration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ExtEventConfiguration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ExtEventConfiguration().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Atrações;
-    private javax.swing.JPanel Comerciantes;
     private javax.swing.JPanel Empresas;
-    private javax.swing.JPanel Funcionários;
     private javax.swing.JPanel InfoGeral;
     private javax.swing.JPanel Participantes;
     private javax.swing.JPanel Pessoas;
     private javax.swing.JPanel Quiosques;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -713,16 +531,12 @@ public class ExtEventConfiguration extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JList<String> jList4;
-    private javax.swing.JList<String> jList5;
     private javax.swing.JList<String> jList6;
     private javax.swing.JList<String> jList7;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
