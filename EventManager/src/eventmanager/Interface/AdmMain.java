@@ -443,7 +443,7 @@ public class AdmMain extends javax.swing.JFrame {
 
     private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
         // TODO add your handling code here:
-        new AddEvent().setVisible(true);
+        new AddEvento().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddEventActionPerformed
 
