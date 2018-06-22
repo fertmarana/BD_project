@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package eventmanager.Interface;
 
 import java.util.List;
-import Interface.Filter;
+import eventmanager.Interface.Filter;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
