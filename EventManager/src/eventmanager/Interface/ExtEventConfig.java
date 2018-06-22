@@ -20,7 +20,7 @@ import sql.tables.Pessoa;
  * @author macbook
  */
 public class ExtEventConfig extends javax.swing.JFrame {
-    ObservableList<String> p ;
+    List<String> p ;
     /**
      * Creates new form ExtEventConfig
      */
@@ -36,23 +36,23 @@ public class ExtEventConfig extends javax.swing.JFrame {
         //Pessoa p = new Pessoa();
         int i = 0;
         DefaultListModel modelPessoa = new DefaultListModel();
-        p= FXCollections.observableArrayList();
+        p= Pessoa.getListPessoa();
         System.out.printf("aii");
         
         
-        /*
+        
         while (i < p.size()){
-             modelPessoa.addElement(p);
+             modelPessoa.addElement(p.get(i));
              i++;
         }
         jList1.setModel(modelPessoa);
                         
-        
+        /*
         ResultSet res;
         System.out.printf("deu certo");
 		List<String> list = new ArrayList<>();
 		String sql = "select NOME from PESSOA";
-                System.out.printf("vamos ver");
+                //System.out.printf("vamos ver");
 		try {
                     
                     
@@ -71,8 +71,8 @@ public class ExtEventConfig extends javax.swing.JFrame {
 		} catch (SQLException e) {
             throw new RuntimeException(e);
 		}
-        */
-       
+        
+       */
         
         
         

@@ -107,19 +107,19 @@ public class Pessoa {
 		}
 	}
     
-        public static ObservableList<String> getListPessoa(){
+        public static List<String> getListPessoa(){
 		ResultSet res;
 		List<String> list = new ArrayList<>();
 		String sql = "select NOME from PESSOA";
 		try {
 			res = ConnectionManager.query(sql);
 			while(res.next())			
-				list.add(res.getString(4));
+				list.add(res.getString(1));
 				
 			res.close();
 			ConnectionManager.closeQuery();
 			System.out.printf("%s", list.toString());
-			return FXCollections.observableList(list);
+			return list;
 		} catch (SQLException e) {
             throw new RuntimeException(e);
 		}
